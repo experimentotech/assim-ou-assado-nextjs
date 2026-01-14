@@ -6,11 +6,7 @@ export const Sidebar: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ is
   const links = [
     { label: 'Termos de Uso', href: '/assim-ou-assado/termos-de-uso' },
     { label: 'Privacidade', href: '/assim-ou-assado/privacidade' },
-    { label: 'Licenças', href: '#' },
     { label: 'GitHub', href: 'https://github.com/experimentotech/assim-ou-assado-webapp' },
-    { label: 'YouTube', href: 'https://youtube.com/@ExperimentoTech' },
-    { label: 'Instagram', href: '#' },
-    { label: 'TikTok', href: '#' },
     { label: 'Site', href: 'https://www.experimentotech.com' }
   ];
   
@@ -37,8 +33,6 @@ export const Sidebar: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ is
                 key={index}
                 href={link.href}
                 className="block text-gray-700 hover:text-blue-600"
-                target={link.href.startsWith('http') ? '_blank' : undefined}
-                rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
               >
                 {link.label}
               </a>

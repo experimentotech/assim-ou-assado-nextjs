@@ -10,6 +10,7 @@ import { prepareSearchableList } from "@/services/foodSearch";
 import { calculateDestinationQuantity, calculateNutrition } from "@/services/nutritionCalculator";
 import { Alimento, AlimentoSearchable, ComparisonRow } from "@/types";
 import { Menu } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
 export default function Home() {
@@ -129,7 +130,7 @@ export default function Home() {
       <header className="bg-white shadow-sm flex-shrink-0">
         <div className="max-w-2xl mx-auto px-4 py-4 flex justify-between items-center">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Assim ou Assado</h1>
+            <h1 className="text-2xl font-bold text-gray-900"><Link href="/">Assim ou Assado</Link></h1>
             <p className="text-sm text-gray-600">por @experimentotech</p>
           </div>
           <button
@@ -233,45 +234,20 @@ export default function Home() {
             <a href="/assim-ou-assado/privacidade" className="text-gray-600 hover:text-blue-600">
               Privacidade
             </a>
-            <a href="/assim-ou-assado/licencas" className="text-gray-600 hover:text-blue-600">
-              Licenças
-            </a>
             <a
               href="https://github.com/experimentotech/assim-ou-assado-webapp"
-              target="_blank"
-              rel="noopener noreferrer"
               className="text-gray-600 hover:text-blue-600"
             >
               GitHub
             </a>
             <a
               href="https://youtube.com/@ExperimentoTech"
-              target="_blank"
-              rel="noopener noreferrer"
               className="text-gray-600 hover:text-blue-600"
             >
               YouTube
             </a>
             <a
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-600 hover:text-blue-600"
-            >
-              Instagram
-            </a>
-            <a
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-600 hover:text-blue-600"
-            >
-              TikTok
-            </a>
-            <a
               href="https://www.experimentotech.com"
-              target="_blank"
-              rel="noopener noreferrer"
               className="text-gray-600 hover:text-blue-600"
             >
               Site
