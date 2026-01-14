@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'pt_BR',
-    url: 'https://www.experimentotech.com/assim-ou-assado',
+    url: 'https://www.experimentotech.com/assim-ou-assado/',
     title: 'Assim ou Assado - Conversor de Ingredientes',
     description: 'Encontre a medida certa para substituir ingredientes mantendo os mesmos nutrientes.',
     siteName: 'Assim ou Assado',
