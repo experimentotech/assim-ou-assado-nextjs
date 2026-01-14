@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export const ConsentBanner: React.FC = () => {
@@ -29,9 +30,9 @@ export const ConsentBanner: React.FC = () => {
       <div className="max-w-4xl mx-auto flex items-center justify-between gap-4">
         <p className="text-sm text-black">
           Este site utiliza &quot;Cookies&quot; para melhorar a sua experiência.{' '}
-          <a href="/privacidade" className="underline">
+          <Link href="/privacidade" className="underline">
             Saiba mais
-          </a>
+          </Link>
           .
         </p>
         <button
