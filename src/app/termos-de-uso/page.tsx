@@ -58,7 +58,7 @@ export default function TermosDeUso() {
               As informações nutricionais utilizadas pela Ferramenta são obtidas
               a partir de fontes públicas, incluindo:
             </p>
-            <ul className="list-disc list-inside space-y-1">
+            <ul className="list-disc list-inside my-1">
               <li>Tabela Brasileira de Composição de Alimentos (TACO)</li>
               <li>Outras fontes públicas amplamente divulgadas</li>
             </ul>
@@ -83,7 +83,7 @@ export default function TermosDeUso() {
               E = (4 × P) + (4 × C) + (9 × L)
             </div>
 
-            <ul className="space-y-1">
+            <ul className="my-1">
               <li><strong>E</strong> = Energia (kcal)</li>
               <li><strong>P</strong> = Proteína (g)</li>
               <li><strong>C</strong> = Carboidrato (g)</li>
@@ -110,7 +110,7 @@ export default function TermosDeUso() {
               6. Isenção de Responsabilidade
             </h2>
             <p>O desenvolvedor da Ferramenta não se responsabiliza por:</p>
-            <ul className="list-disc list-inside space-y-1">
+            <ul className="list-disc list-inside my-1">
               <li>Decisões alimentares tomadas com base nos resultados apresentados</li>
               <li>Planos alimentares, dietas clínicas, esportivas ou terapêuticas</li>
               <li>Eventuais erros, omissões ou desatualizações nos dados utilizados</li>
