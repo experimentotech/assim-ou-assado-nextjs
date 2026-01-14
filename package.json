@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "rm -rf dist && mkdir dist && mv out dist/assim-ou-assado",
     "start": "next start",
     "lint": "eslint"
   },

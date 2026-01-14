@@ -2,6 +2,6 @@
   "name": "assim-ou-assado-webapp",
   "compatibility_date":"2026-01-13",
   "assets": {
-    "directory": "./out"
+    "directory": "./dist"
   }
 }
