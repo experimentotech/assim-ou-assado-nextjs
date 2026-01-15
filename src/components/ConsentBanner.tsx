@@ -4,13 +4,13 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export const ConsentBanner: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
   
   useEffect(() => {
     new Promise<void>((resolve) => {
       const consent = localStorage.getItem('cookie-consent');
-      if (consent) {
-        setIsVisible(false);
+      if (!consent) {
+        setIsVisible(true);
       }
       resolve();
     });
