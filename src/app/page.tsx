@@ -2,6 +2,7 @@
 
 import { Autocomplete } from "@/components/Autocomplete";
 import { ComparisonTable } from "@/components/ComparisonTable";
+import { CompensationModal } from "@/components/CompensationModal";
 import { ConsentBanner } from "@/components/ConsentBanner";
 import { Logo } from "@/components/Logo";
 import { Sidebar } from "@/components/Sidebar";
@@ -24,6 +25,7 @@ export default function Home() {
   const [toFood, setToFood] = useState<Alimento | null>(null);
   const [toFoodSearch, setToFoodSearch] = useState('');
   const [toQuantity, setToQuantity] = useState('');
+  const [isCompensationOpen, setIsCompensationOpen] = useState(false);
   
   // Mock data for demonstration
   useEffect(() => {
@@ -75,6 +77,10 @@ export default function Home() {
     setToFoodSearch('');
     setToQuantity('');
   };
+
+  const handleCompensationClose = () => {
+    setIsCompensationOpen(false);
+  };
   
   const comparisonRows: ComparisonRow[] = useMemo(() => {
     if (!fromFood || !toFood || !fromQuantity || !toQuantity) {
@@ -124,7 +130,25 @@ export default function Home() {
       }
     ];
   }, [fromFood, toFood, fromQuantity, toQuantity]);
-  
+
+  const kcalIncreasePercent = useMemo(() => {
+    const kcalRow = comparisonRows.find((row) => row.label === 'Kcal');
+    if (!kcalRow || kcalRow.fromValue <= 0 || kcalRow.toValue <= kcalRow.fromValue) {
+      return null;
+    }
+
+    const increase = ((kcalRow.toValue - kcalRow.fromValue) / kcalRow.fromValue) * 100;
+    return Math.round(increase);
+  }, [comparisonRows]);
+
+  const kcalIncrease = useMemo(() => {
+    const kcalRow = comparisonRows.find((row) => row.label === 'Kcal');
+    if (!kcalRow || kcalRow.toValue <= kcalRow.fromValue) {
+      return null;
+    }
+    return kcalRow.toValue - kcalRow.fromValue;
+  }, [comparisonRows]);
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <header className="bg-white shadow-sm flex-shrink-0">
@@ -220,11 +244,25 @@ export default function Home() {
             </h2>
             <div className="bg-white rounded-lg p-6 shadow-sm">
               <ComparisonTable rows={comparisonRows} />
+              {kcalIncreasePercent !== null && (
+                <div className="mt-6 flex flex-col gap-3">
+                  <p className="text-lg text-gray-700">
+                    Houve um aumento calorico de <strong>{kcalIncreasePercent}%</strong> Gostaria de compensar?
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setIsCompensationOpen(true)}
+                    className="w-full sm:w-auto px-4 py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition"
+                  >
+                    Compensar
+                  </button>
+                </div>
+              )}
             </div>
           </>
         )}
       </main>
-      
+
       <footer className="bg-white border-t mt-auto flex-shrink-0">
         <div className="max-w-2xl mx-auto px-4 py-8">
           <div className="flex flex-wrap gap-4 justify-center text-sm">
@@ -258,6 +296,11 @@ export default function Home() {
       
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       <ConsentBanner />
+      {isCompensationOpen && <CompensationModal
+        onClose={handleCompensationClose}
+        foods={searchableAlimentos}
+        kcalIncrease={kcalIncrease}
+      />}
     </div>
   );
 };
