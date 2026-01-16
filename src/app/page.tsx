@@ -272,24 +272,6 @@ export default function Home() {
             <a href="/assim-ou-assado/privacidade" className="text-gray-600 hover:text-blue-600">
               Privacidade
             </a>
-            <a
-              href="https://github.com/experimentotech/assim-ou-assado-webapp"
-              className="text-gray-600 hover:text-blue-600"
-            >
-              GitHub
-            </a>
-            <a
-              href="https://youtube.com/@ExperimentoTech"
-              className="text-gray-600 hover:text-blue-600"
-            >
-              YouTube
-            </a>
-            <a
-              href="https://www.experimentotech.com"
-              className="text-gray-600 hover:text-blue-600"
-            >
-              Site
-            </a>
           </div>
         </div>
       </footer>

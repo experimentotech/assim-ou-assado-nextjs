@@ -6,8 +6,6 @@ export const Sidebar: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ is
   const links = [
     { label: 'Termos de Uso', href: '/assim-ou-assado/termos-de-uso' },
     { label: 'Privacidade', href: '/assim-ou-assado/privacidade' },
-    { label: 'GitHub', href: 'https://github.com/experimentotech/assim-ou-assado-webapp' },
-    { label: 'Site', href: 'https://www.experimentotech.com' }
   ];
   
   return (
