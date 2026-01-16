@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { Search, X } from "lucide-react";
+import { Search, ThumbsUp, X } from "lucide-react";
 import { Alimento, AlimentoSearchable } from "@/types";
-import { searchFoods } from "@/services/foodSearch";
+import { normalizeText, searchFoods } from "@/services/foodSearch";
+import { track } from "@/services/monitoring";
 
 
 interface AutocompleteProps {
@@ -16,6 +17,8 @@ interface AutocompleteProps {
   excludeId?: number;
   maxResults?: number;
 }
+
+const suggestionsSet = new Set();
 
 export const Autocomplete: React.FC<AutocompleteProps> = ({
   value,
@@ -30,8 +33,11 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
   const [isOpen, setIsOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const [suggestionStatus, setSuggestionStatus] = useState<"idle" | "sent" | "hidden">("idle");
+  const hideTimeoutRef = useRef<number | null>(null);
   
   const results = searchFoods(value, foods, excludeId).slice(0, maxResults);
+  const normalizedSuggestion = normalizeText(value).trim().slice(0, 48);
   
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -41,6 +47,14 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (hideTimeoutRef.current) {
+        window.clearTimeout(hideTimeoutRef.current);
+      }
+    };
   }, []);
   
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -58,6 +72,22 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
       setIsOpen(false);
     }
   };
+
+  const handleNoResultsClick = () => {
+    if (!normalizedSuggestion || suggestionStatus !== "idle") return;
+    track({
+      event: "autocomplete_no_results_suggestion",
+      suggestion: normalizedSuggestion
+    });
+    suggestionsSet.add(normalizedSuggestion);
+    setSuggestionStatus("sent");
+    if (hideTimeoutRef.current) {
+      window.clearTimeout(hideTimeoutRef.current);
+    }
+    hideTimeoutRef.current = window.setTimeout(() => {
+      setSuggestionStatus("hidden");
+    }, 3000);
+  };
   
   return (
     <div ref={wrapperRef} className="relative w-full">
@@ -70,6 +100,7 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
             onChange(e.target.value);
             setIsOpen(true);
             setSelectedIndex(-1);
+            setSuggestionStatus('idle');
           }}
           onFocus={() => setIsOpen(true)}
           onKeyDown={handleKeyDown}
@@ -108,8 +139,24 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
               </button>
             ))
           ) : (
-            <div className="px-4 py-3 text-gray-500">
-              Nenhum alimento encontrado
+            <div className="flex items-center gap-3 px-4 py-3 text-gray-500">
+              <span>Nenhum resultado encontrado</span>
+              {suggestionStatus === "idle" && !suggestionsSet.has(normalizedSuggestion) && (
+                <button
+                  type="button"
+                  onClick={handleNoResultsClick}
+                  disabled={!normalizedSuggestion || suggestionStatus !== "idle"}
+                  className="ml-auto text-sm font-medium text-blue-600 hover:text-blue-700 disabled:text-gray-400"
+                  aria-label="Sugerir"
+                >
+                <span className="text-sm font-medium">Sugerir</span>
+                </button>
+              )}
+              {suggestionStatus === "sent" && (
+                <div className="ml-auto">
+                  <ThumbsUp className="h-4 w-4" />
+                </div>
+              )}
             </div>
           )}
         </div>
