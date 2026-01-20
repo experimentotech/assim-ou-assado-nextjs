@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Search, ThumbsUp, X } from "lucide-react";
 import { Alimento, AlimentoSearchable } from "@/types";
 import { normalizeText, searchFoods } from "@/services/foodSearch";
-import { track } from "@/services/monitoring";
+import { tracker } from "@/services/monitoring";
 
 
 interface AutocompleteProps {
@@ -75,10 +75,7 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
 
   const handleNoResultsClick = () => {
     if (!normalizedSuggestion || suggestionStatus !== "idle") return;
-    track({
-      event: "autocomplete_no_results_suggestion",
-      suggestion: normalizedSuggestion
-    });
+    tracker.noResultSuggestion(normalizedSuggestion);
     suggestionsSet.add(normalizedSuggestion);
     setSuggestionStatus("sent");
     if (hideTimeoutRef.current) {

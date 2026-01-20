@@ -8,11 +8,12 @@ import { Logo } from "@/components/Logo";
 import { Sidebar } from "@/components/Sidebar";
 import { alimentos } from "@/data/alimentos";
 import { prepareSearchableList } from "@/services/foodSearch";
+import { tracker } from "@/services/monitoring";
 import { calculateDestinationQuantity, calculateNutrition } from "@/services/nutritionCalculator";
 import { Alimento, AlimentoSearchable, ComparisonRow } from "@/types";
 import { Menu } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { ChangeEvent, useEffect, useMemo, useState } from "react";
 
 export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -46,23 +47,40 @@ export default function Home() {
     }
 
     const calculatedQty = calculateDestinationQuantity(fromFood, toFood, qty);
+    const toQuantity = calculatedQty.toFixed(0);
 
     new Promise<void>((resolve) => {
-      setToQuantity(calculatedQty.toFixed(0));
+      setToQuantity(toQuantity);
+      tracker.comparison({
+        fromFood: fromFood.nome,
+        fromQty: fromQuantity,
+        fromClassif: fromFood.classif,
+        toFood: toFood.nome,
+        toQty: toQuantity,
+        toClassif: toFood.classif,
+      });
       resolve();
     });
   }, [fromFood, toFood, fromQuantity]);
-  
+
   const handleFromFoodSelect = (food: Alimento) => {
     setFromFood(food);
     setFromFoodSearch(food.nome);
+    tracker.initialFoodChanged(food.nome);
   };
-  
+
+  const handleFromQuantityChanged = (e: ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+    setFromQuantity(val);
+    if (!val) setToQuantity('');
+  }
+
   const handleToFoodSelect = (food: Alimento) => {
     setToFood(food);
     setToFoodSearch(food.nome);
+    tracker.destinationFoodChanged(food.nome);
   };
-  
+
   const handleFromFoodClear = () => {
     setFromFood(null);
     setFromFoodSearch('');
@@ -71,7 +89,7 @@ export default function Home() {
     setToFoodSearch('');
     setToQuantity('');
   };
-  
+
   const handleToFoodClear = () => {
     setToFood(null);
     setToFoodSearch('');
@@ -81,17 +99,22 @@ export default function Home() {
   const handleCompensationClose = () => {
     setIsCompensationOpen(false);
   };
-  
+
+  const handleCompensationClicked = () => {
+    setIsCompensationOpen(true);
+    tracker.compensationClicked();
+  };
+
   const comparisonRows: ComparisonRow[] = useMemo(() => {
     if (!fromFood || !toFood || !fromQuantity || !toQuantity) {
       return [];
     }
-    
+
     const fromQty = parseFloat(fromQuantity);
     const toQty = parseFloat(toQuantity);
     const fromNutrition = calculateNutrition(fromFood, fromQty);
     const toNutrition = calculateNutrition(toFood, toQty);
-    
+
     return [
       {
         label: 'Gr',
@@ -165,12 +188,12 @@ export default function Home() {
           </button>
         </div>
       </header>
-      
+
       <main className="max-w-2xl w-full mx-auto px-4 py-8 flex-1">
         <h2 className="text-lg font-semibold text-gray-900 mb-4">
           Encontre a medida certa pra sua substituição
         </h2>
-        
+
         <div className="bg-white rounded-lg p-6 shadow-sm mb-8">
           <div className="space-y-4">
             <Autocomplete
@@ -183,15 +206,12 @@ export default function Home() {
               foods={searchableAlimentos}
               placeholder="Ingrediente inicial"
             />
-            
+
             <div className="grid grid-cols-4 gap-2">
               <input
                 type="number"
                 value={fromQuantity}
-                onChange={(e) => {
-                  setFromQuantity(e.target.value);
-                  if (!e.target.value) setToQuantity('');
-                }}
+                onChange={handleFromQuantityChanged}
                 placeholder="Quantidade"
                 disabled={!fromFood}
                 className="col-span-3 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100"
@@ -200,7 +220,7 @@ export default function Home() {
                 gr
               </div>
             </div>
-            
+
             <div className="flex items-center justify-center py-4">
               <div className="flex-1 border-t border-gray-300"></div>
               <div className="p-2 bg-white rounded-full border-gray-300 border-solid border-2">
@@ -208,7 +228,7 @@ export default function Home() {
               </div>
               <div className="flex-1 border-t border-gray-300"></div>
             </div>
-            
+
             <Autocomplete
               value={toFoodSearch}
               onChange={(value) => {
@@ -221,7 +241,7 @@ export default function Home() {
               disabled={!fromFood}
               excludeId={fromFood?.id}
             />
-            
+
             <div className="grid grid-cols-4 gap-2">
               <input
                 type="number"
@@ -236,7 +256,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        
+
         {comparisonRows.length > 0 && (
           <>
             <h2 className="text-lg font-semibold text-gray-900 mb-4">
@@ -251,7 +271,7 @@ export default function Home() {
                   </p>
                   <button
                     type="button"
-                    onClick={() => setIsCompensationOpen(true)}
+                    onClick={() => handleCompensationClicked()}
                     className="w-full sm:w-auto px-4 py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition"
                   >
                     Compensar
@@ -275,7 +295,7 @@ export default function Home() {
           </div>
         </div>
       </footer>
-      
+
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       <ConsentBanner />
       {isCompensationOpen && <CompensationModal

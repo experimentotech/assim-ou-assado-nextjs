@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { Autocomplete } from "@/components/Autocomplete";
 import { Alimento, AlimentoSearchable } from "@/types";
 import { calculateNutrition } from "@/services/nutritionCalculator";
+import { tracker } from "@/services/monitoring";
 
 interface CompensationModalProps {
   onClose: () => void;
@@ -77,6 +78,7 @@ export const CompensationModal = ({
           onSelect={(food) => {
             setCompensationFood(food);
             setCompensationSearch(food.nome);
+            tracker.compensationFoodChanged(food.nome);
           }}
           foods={foods}
           placeholder="Selecione um alimento"
