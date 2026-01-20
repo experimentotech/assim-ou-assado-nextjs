@@ -29,7 +29,7 @@ export const searchFoods = (
   foods: AlimentoSearchable[],
   excludeId?: number
 ): AlimentoSearchable[] => {
-  if (!query.trim()) return foods.filter(f => f.id !== excludeId);
+  if (!query.trim()) return [];
   
   const normalizedQuery = normalizeText(query);
   const terms = normalizedQuery.split(/\s+/).filter(t => t.length > 0);

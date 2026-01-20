@@ -136,25 +136,31 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
               </button>
             ))
           ) : (
-            <div className="flex items-center gap-3 px-4 py-3 text-gray-500">
-              <span>Nenhum resultado encontrado</span>
-              {suggestionStatus === "idle" && !suggestionsSet.has(normalizedSuggestion) && (
-                <button
-                  type="button"
-                  onClick={handleNoResultsClick}
-                  disabled={!normalizedSuggestion || suggestionStatus !== "idle"}
-                  className="ml-auto text-sm font-medium text-blue-600 hover:text-blue-700 disabled:text-gray-400"
-                  aria-label="Sugerir"
-                >
-                <span className="text-sm font-medium">Sugerir</span>
-                </button>
-              )}
-              {suggestionStatus === "sent" && (
-                <div className="ml-auto">
-                  <ThumbsUp className="h-4 w-4" />
-                </div>
-              )}
-            </div>
+            value ? (
+              <div className="flex items-center gap-3 px-4 py-3 text-gray-500">
+                <span>Nenhum resultado encontrado</span>
+                {suggestionStatus === "idle" && !suggestionsSet.has(normalizedSuggestion) && (
+                  <button
+                    type="button"
+                    onClick={handleNoResultsClick}
+                    disabled={!normalizedSuggestion || suggestionStatus !== "idle"}
+                    className="ml-auto text-sm font-medium text-blue-600 hover:text-blue-700 disabled:text-gray-400"
+                    aria-label="Sugerir"
+                  >
+                  <span className="text-sm font-medium">Sugerir</span>
+                  </button>
+                )}
+                {suggestionStatus === "sent" && (
+                  <div className="ml-auto">
+                    <ThumbsUp className="h-4 w-4" />
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="flex items-center gap-3 px-4 py-3 text-gray-500">
+                <span>Pesquise um alimento</span>
+              </div>
+            )
           )}
         </div>
       )}
