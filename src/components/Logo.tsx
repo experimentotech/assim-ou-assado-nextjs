@@ -1,8 +1,8 @@
 import Image from "next/image";
 
 interface LogoProps {
-    width: number;
-    height: number;
+  width: number;
+  height: number;
 }
 
 export const Logo: React.FC<LogoProps> = ({ width, height }: LogoProps) => (
@@ -12,5 +12,6 @@ export const Logo: React.FC<LogoProps> = ({ width, height }: LogoProps) => (
     width={width}
     height={height}
     className="w-10 h-10"
-    priority />
+    priority
+  />
 );

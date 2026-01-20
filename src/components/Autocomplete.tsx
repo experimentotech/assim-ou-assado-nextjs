@@ -6,7 +6,6 @@ import { Alimento, AlimentoSearchable } from "@/types";
 import { normalizeText, searchFoods } from "@/services/foodSearch";
 import { tracker } from "@/services/monitoring";
 
-
 interface AutocompleteProps {
   value: string;
   onChange: (value: string) => void;
@@ -28,25 +27,30 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
   placeholder,
   disabled = false,
   excludeId,
-  maxResults = 6
+  maxResults = 6,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const [suggestionStatus, setSuggestionStatus] = useState<"idle" | "sent" | "hidden">("idle");
+  const [suggestionStatus, setSuggestionStatus] = useState<
+    "idle" | "sent" | "hidden"
+  >("idle");
   const hideTimeoutRef = useRef<number | null>(null);
-  
+
   const results = searchFoods(value, foods, excludeId).slice(0, maxResults);
   const normalizedSuggestion = normalizeText(value).trim().slice(0, 48);
-  
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
+      if (
+        wrapperRef.current &&
+        !wrapperRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   useEffect(() => {
@@ -56,17 +60,17 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
       }
     };
   }, []);
-  
+
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (!isOpen) return;
-    
-    if (e.key === 'ArrowDown') {
+
+    if (e.key === "ArrowDown") {
       e.preventDefault();
-      setSelectedIndex(prev => (prev < results.length - 1 ? prev + 1 : prev));
-    } else if (e.key === 'ArrowUp') {
+      setSelectedIndex((prev) => (prev < results.length - 1 ? prev + 1 : prev));
+    } else if (e.key === "ArrowUp") {
       e.preventDefault();
-      setSelectedIndex(prev => (prev > 0 ? prev - 1 : -1));
-    } else if (e.key === 'Enter' && selectedIndex >= 0) {
+      setSelectedIndex((prev) => (prev > 0 ? prev - 1 : -1));
+    } else if (e.key === "Enter" && selectedIndex >= 0) {
       e.preventDefault();
       onSelect(results[selectedIndex]);
       setIsOpen(false);
@@ -85,7 +89,7 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
       setSuggestionStatus("hidden");
     }, 3000);
   };
-  
+
   return (
     <div ref={wrapperRef} className="relative w-full">
       <div className="relative flex items-center">
@@ -97,7 +101,7 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
             onChange(e.target.value);
             setIsOpen(true);
             setSelectedIndex(-1);
-            setSuggestionStatus('idle');
+            setSuggestionStatus("idle");
           }}
           onFocus={() => setIsOpen(true)}
           onKeyDown={handleKeyDown}
@@ -108,7 +112,7 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
         {value && (
           <button
             onClick={() => {
-              onChange('');
+              onChange("");
               setIsOpen(false);
             }}
             className="absolute right-3 text-gray-400 hover:text-gray-600"
@@ -117,7 +121,7 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
           </button>
         )}
       </div>
-      
+
       {isOpen && (
         <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
           {results.length > 0 ? (
@@ -129,38 +133,39 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
                   setIsOpen(false);
                 }}
                 className={`w-full px-4 py-3 text-left hover:bg-gray-100 ${
-                  index === selectedIndex ? 'bg-gray-100' : ''
+                  index === selectedIndex ? "bg-gray-100" : ""
                 }`}
               >
                 {food.nome}
               </button>
             ))
-          ) : (
-            value ? (
-              <div className="flex items-center gap-3 px-4 py-3 text-gray-500">
-                <span>Nenhum resultado encontrado</span>
-                {suggestionStatus === "idle" && !suggestionsSet.has(normalizedSuggestion) && (
+          ) : value ? (
+            <div className="flex items-center gap-3 px-4 py-3 text-gray-500">
+              <span>Nenhum resultado encontrado</span>
+              {suggestionStatus === "idle" &&
+                !suggestionsSet.has(normalizedSuggestion) && (
                   <button
                     type="button"
                     onClick={handleNoResultsClick}
-                    disabled={!normalizedSuggestion || suggestionStatus !== "idle"}
+                    disabled={
+                      !normalizedSuggestion || suggestionStatus !== "idle"
+                    }
                     className="ml-auto text-sm font-medium text-blue-600 hover:text-blue-700 disabled:text-gray-400"
                     aria-label="Sugerir"
                   >
-                  <span className="text-sm font-medium">Sugerir</span>
+                    <span className="text-sm font-medium">Sugerir</span>
                   </button>
                 )}
-                {suggestionStatus === "sent" && (
-                  <div className="ml-auto">
-                    <ThumbsUp className="h-4 w-4" />
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div className="flex items-center gap-3 px-4 py-3 text-gray-500">
-                <span>Pesquise um alimento</span>
-              </div>
-            )
+              {suggestionStatus === "sent" && (
+                <div className="ml-auto">
+                  <ThumbsUp className="h-4 w-4" />
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="flex items-center gap-3 px-4 py-3 text-gray-500">
+              <span>Pesquise um alimento</span>
+            </div>
           )}
         </div>
       )}

@@ -2,7 +2,7 @@ import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 
 export const metadata = {
-  title: 'Política de Privacidade - Assim ou Assado',
+  title: "Política de Privacidade - Assim ou Assado",
 };
 
 export default function Privacidade() {
@@ -27,9 +27,7 @@ export default function Privacidade() {
               <strong>Assim ou Assado</strong> coleta, utiliza e protege as
               informações dos usuários que acessam e utilizam a aplicação.
             </p>
-            <p>
-              O uso da aplicação implica na concordância com esta Política.
-            </p>
+            <p>O uso da aplicação implica na concordância com esta Política.</p>
           </section>
 
           <section className="space-y-4 my-4">
@@ -77,9 +75,7 @@ export default function Privacidade() {
             <h2 className="text-xl font-semibold text-neutral-900">
               4. Finalidade do Tratamento dos Dados
             </h2>
-            <p>
-              Os dados coletados têm como finalidade:
-            </p>
+            <p>Os dados coletados têm como finalidade:</p>
             <ul className="list-disc list-inside my-1">
               <li>Compreender como a aplicação é utilizada</li>
               <li>Identificar problemas de usabilidade</li>
@@ -93,8 +89,8 @@ export default function Privacidade() {
               5. Compartilhamento de Dados
             </h2>
             <p>
-              Os dados coletados são processados pelo Google Analytics, de acordo
-              com suas próprias políticas de privacidade.
+              Os dados coletados são processados pelo Google Analytics, de
+              acordo com suas próprias políticas de privacidade.
             </p>
             <p>
               O <strong>Assim ou Assado</strong> não vende, compartilha ou
@@ -124,8 +120,8 @@ export default function Privacidade() {
             </h2>
             <p>
               O projeto adota boas práticas técnicas e organizacionais para
-              proteger os dados coletados contra acesso não autorizado,
-              uso indevido ou divulgação indevida.
+              proteger os dados coletados contra acesso não autorizado, uso
+              indevido ou divulgação indevida.
             </p>
           </section>
 
@@ -135,8 +131,8 @@ export default function Privacidade() {
             </h2>
             <p>
               Esta Política de Privacidade pode ser atualizada a qualquer
-              momento, sem aviso prévio. Recomenda-se a revisão periódica
-              deste documento.
+              momento, sem aviso prévio. Recomenda-se a revisão periódica deste
+              documento.
             </p>
           </section>
 

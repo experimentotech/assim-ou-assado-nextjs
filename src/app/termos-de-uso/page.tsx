@@ -2,7 +2,7 @@ import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 
 export const metadata = {
-  title: 'Termos de Uso - Assim ou Assado',
+  title: "Termos de Uso - Assim ou Assado",
 };
 
 export default function TermosDeUso() {
@@ -24,7 +24,8 @@ export default function TermosDeUso() {
               1. Aceitação dos Termos
             </h2>
             <p>
-              Ao acessar e utilizar a ferramenta <strong>Assim ou Assado</strong>
+              Ao acessar e utilizar a ferramenta{" "}
+              <strong>Assim ou Assado</strong>
               (“Ferramenta”), o usuário declara que leu, compreendeu e concorda
               com os presentes Termos de Uso. Caso não concorde com algum dos
               termos, recomenda-se não utilizar a Ferramenta.
@@ -36,17 +37,17 @@ export default function TermosDeUso() {
               2. Descrição da Ferramenta
             </h2>
             <p>
-              O <strong>Assim ou Assado</strong> é uma ferramenta pública e gratuita
-              desenvolvida pela <strong>Experimento Tech</strong>, com o objetivo
-              de auxiliar usuários a estimar quantidades equivalentes de alimentos
-              com base na comparação de macronutrientes
-              (proteínas, carboidratos e lipídios).
+              O <strong>Assim ou Assado</strong> é uma ferramenta pública e
+              gratuita desenvolvida pela <strong>Experimento Tech</strong>, com
+              o objetivo de auxiliar usuários a estimar quantidades equivalentes
+              de alimentos com base na comparação de macronutrientes (proteínas,
+              carboidratos e lipídios).
             </p>
             <p>
-              A Ferramenta permite, por exemplo, calcular a quantidade necessária
-              de um alimento substituto para atingir um determinado valor de
-              macronutriente, tomando como referência outro alimento e a porção
-              informada pelo usuário.
+              A Ferramenta permite, por exemplo, calcular a quantidade
+              necessária de um alimento substituto para atingir um determinado
+              valor de macronutriente, tomando como referência outro alimento e
+              a porção informada pelo usuário.
             </p>
           </section>
 
@@ -64,8 +65,8 @@ export default function TermosDeUso() {
             </ul>
             <p>
               Os valores apresentados são estimativas médias e podem variar de
-              acordo com fatores como marca, método de preparo, origem do alimento
-              e variações naturais dos ingredientes.
+              acordo com fatores como marca, método de preparo, origem do
+              alimento e variações naturais dos ingredientes.
             </p>
           </section>
 
@@ -75,8 +76,16 @@ export default function TermosDeUso() {
             </h2>
             <p>
               Quando aplicável, o cálculo do valor energético (kcal) é realizado
-              com base no <a href="https://pt.wikipedia.org/wiki/Energia_alimentar" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Sistema de Atwater</a>, utilizando a seguinte
-              fórmula:
+              com base no{" "}
+              <a
+                href="https://pt.wikipedia.org/wiki/Energia_alimentar"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:underline"
+              >
+                Sistema de Atwater
+              </a>
+              , utilizando a seguinte fórmula:
             </p>
 
             <div className="bg-gray-100 rounded-lg p-4 font-mono text-sm text-gray-900 my-4">
@@ -84,10 +93,18 @@ export default function TermosDeUso() {
             </div>
 
             <ul className="my-1">
-              <li><strong>E</strong> = Energia (kcal)</li>
-              <li><strong>P</strong> = Proteína (g)</li>
-              <li><strong>C</strong> = Carboidrato (g)</li>
-              <li><strong>L</strong> = Lipídios (g)</li>
+              <li>
+                <strong>E</strong> = Energia (kcal)
+              </li>
+              <li>
+                <strong>P</strong> = Proteína (g)
+              </li>
+              <li>
+                <strong>C</strong> = Carboidrato (g)
+              </li>
+              <li>
+                <strong>L</strong> = Lipídios (g)
+              </li>
             </ul>
           </section>
 
@@ -96,12 +113,13 @@ export default function TermosDeUso() {
               5. Finalidade Informativa
             </h2>
             <p>
-              A Ferramenta possui finalidade exclusivamente informativa e educacional.
-              Ela não substitui a orientação de profissionais da saúde, como
-              nutricionistas, médicos ou outros especialistas.
+              A Ferramenta possui finalidade exclusivamente informativa e
+              educacional. Ela não substitui a orientação de profissionais da
+              saúde, como nutricionistas, médicos ou outros especialistas.
             </p>
             <p>
-              O uso das informações fornecidas é de inteira responsabilidade do usuário.
+              O uso das informações fornecidas é de inteira responsabilidade do
+              usuário.
             </p>
           </section>
 
@@ -111,10 +129,21 @@ export default function TermosDeUso() {
             </h2>
             <p>O desenvolvedor da Ferramenta não se responsabiliza por:</p>
             <ul className="list-disc list-inside my-1">
-              <li>Decisões alimentares tomadas com base nos resultados apresentados</li>
-              <li>Planos alimentares, dietas clínicas, esportivas ou terapêuticas</li>
-              <li>Eventuais erros, omissões ou desatualizações nos dados utilizados</li>
-              <li>Consequências diretas ou indiretas decorrentes do uso da Ferramenta</li>
+              <li>
+                Decisões alimentares tomadas com base nos resultados
+                apresentados
+              </li>
+              <li>
+                Planos alimentares, dietas clínicas, esportivas ou terapêuticas
+              </li>
+              <li>
+                Eventuais erros, omissões ou desatualizações nos dados
+                utilizados
+              </li>
+              <li>
+                Consequências diretas ou indiretas decorrentes do uso da
+                Ferramenta
+              </li>
             </ul>
           </section>
 
@@ -134,9 +163,9 @@ export default function TermosDeUso() {
               8. Alterações nos Termos
             </h2>
             <p>
-              Estes Termos de Uso podem ser modificados ou atualizados a qualquer
-              momento, sem aviso prévio. Recomenda-se que o usuário revise este
-              documento periodicamente.
+              Estes Termos de Uso podem ser modificados ou atualizados a
+              qualquer momento, sem aviso prévio. Recomenda-se que o usuário
+              revise este documento periodicamente.
             </p>
           </section>
 

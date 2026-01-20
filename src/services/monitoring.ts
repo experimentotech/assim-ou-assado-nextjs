@@ -12,35 +12,35 @@ interface Comparison {
 }
 
 function sendEvent(event: object) {
-  console.log('TrackingEvent', event);
+  console.log("TrackingEvent", event);
   sendGTMEvent(event);
 }
 
 export const tracker = {
   noResultSuggestion(suggestion: string) {
     sendEvent({
-      event: 'no_results_suggestion',
+      event: "no_results_suggestion",
       suggestion: normalizeText(suggestion),
     });
   },
 
   initialFoodChanged(food: string) {
     sendEvent({
-      event: 'initial_food_changed',
+      event: "initial_food_changed",
       food: normalizeText(food),
     });
   },
 
   destinationFoodChanged(food: string) {
     sendEvent({
-      event: 'dest_food_changed',
+      event: "dest_food_changed",
       food: normalizeText(food),
     });
   },
 
   compensationFoodChanged(food: string) {
     sendEvent({
-      event: 'compensation_food_changed',
+      event: "compensation_food_changed",
       food: normalizeText(food),
     });
   },
@@ -59,7 +59,7 @@ export const tracker = {
 
   compensationClicked() {
     sendEvent({
-      event: 'compensation_clicked',
+      event: "compensation_clicked",
     });
   },
 };

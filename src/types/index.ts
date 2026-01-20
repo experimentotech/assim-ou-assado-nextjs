@@ -2,7 +2,7 @@
 // TYPES
 // ============================================================================
 
-export type AlimentoClassif = 'P' | 'C' | 'L';
+export type AlimentoClassif = "P" | "C" | "L";
 
 export interface Alimento {
   id: number;

@@ -6,12 +6,17 @@ import { Alimento } from "@/types";
 export const calculateDestinationQuantity = (
   fromFood: Alimento,
   toFood: Alimento,
-  fromQuantity: number
+  fromQuantity: number,
 ): number => {
-  const attr = fromFood.classif === 'P' ? 'prot' : fromFood.classif === 'C' ? 'carb' : 'lip';
+  const attr =
+    fromFood.classif === "P"
+      ? "prot"
+      : fromFood.classif === "C"
+        ? "carb"
+        : "lip";
   const fromPer100g = fromFood[attr];
   const toPer100g = toFood[attr];
-  
+
   const fromTotal = (fromPer100g * fromQuantity) / 100;
   return Math.round((100 * fromTotal) / toPer100g);
 };
@@ -27,6 +32,6 @@ export const calculateNutrition = (food: Alimento, quantity: number) => {
     kcal: kcal * multiplier,
     prot: food.prot * multiplier,
     carb: food.carb * multiplier,
-    gord: food.lip * multiplier
+    gord: food.lip * multiplier,
   };
 };

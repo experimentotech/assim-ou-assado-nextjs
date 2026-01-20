@@ -9,7 +9,10 @@ import { Sidebar } from "@/components/Sidebar";
 import { alimentos } from "@/data/alimentos";
 import { prepareSearchableList } from "@/services/foodSearch";
 import { tracker } from "@/services/monitoring";
-import { calculateDestinationQuantity, calculateNutrition } from "@/services/nutritionCalculator";
+import {
+  calculateDestinationQuantity,
+  calculateNutrition,
+} from "@/services/nutritionCalculator";
 import { Alimento, AlimentoSearchable, ComparisonRow } from "@/types";
 import { Menu } from "lucide-react";
 import Link from "next/link";
@@ -17,17 +20,19 @@ import { ChangeEvent, useEffect, useMemo, useState } from "react";
 
 export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [searchableAlimentos, setSearchableAlimentos] = useState<AlimentoSearchable[]>([]);
-  
+  const [searchableAlimentos, setSearchableAlimentos] = useState<
+    AlimentoSearchable[]
+  >([]);
+
   const [fromFood, setFromFood] = useState<Alimento | null>(null);
-  const [fromFoodSearch, setFromFoodSearch] = useState('');
-  const [fromQuantity, setFromQuantity] = useState('');
-  
+  const [fromFoodSearch, setFromFoodSearch] = useState("");
+  const [fromQuantity, setFromQuantity] = useState("");
+
   const [toFood, setToFood] = useState<Alimento | null>(null);
-  const [toFoodSearch, setToFoodSearch] = useState('');
-  const [toQuantity, setToQuantity] = useState('');
+  const [toFoodSearch, setToFoodSearch] = useState("");
+  const [toQuantity, setToQuantity] = useState("");
   const [isCompensationOpen, setIsCompensationOpen] = useState(false);
-  
+
   // Mock data for demonstration
   useEffect(() => {
     new Promise<void>((resolve) => {
@@ -35,7 +40,7 @@ export default function Home() {
       resolve();
     });
   }, []);
-  
+
   useEffect(() => {
     if (!fromFood || !toFood || !fromQuantity) {
       return;
@@ -72,8 +77,8 @@ export default function Home() {
   const handleFromQuantityChanged = (e: ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     setFromQuantity(val);
-    if (!val) setToQuantity('');
-  }
+    if (!val) setToQuantity("");
+  };
 
   const handleToFoodSelect = (food: Alimento) => {
     setToFood(food);
@@ -83,17 +88,17 @@ export default function Home() {
 
   const handleFromFoodClear = () => {
     setFromFood(null);
-    setFromFoodSearch('');
-    setFromQuantity('');
+    setFromFoodSearch("");
+    setFromQuantity("");
     setToFood(null);
-    setToFoodSearch('');
-    setToQuantity('');
+    setToFoodSearch("");
+    setToQuantity("");
   };
 
   const handleToFoodClear = () => {
     setToFood(null);
-    setToFoodSearch('');
-    setToQuantity('');
+    setToFoodSearch("");
+    setToQuantity("");
   };
 
   const handleCompensationClose = () => {
@@ -117,55 +122,60 @@ export default function Home() {
 
     return [
       {
-        label: 'Gr',
+        label: "Gr",
         fromValue: Math.round(fromNutrition.weight),
         toValue: Math.round(toNutrition.weight),
         isSelected: false,
-        suffix: 'g'
+        suffix: "g",
       },
       {
-        label: 'Kcal',
+        label: "Kcal",
         fromValue: Math.round(fromNutrition.kcal),
         toValue: Math.round(toNutrition.kcal),
         isSelected: false,
-        suffix: ''
+        suffix: "",
       },
       {
-        label: 'Prot',
+        label: "Prot",
         fromValue: parseFloat(fromNutrition.prot.toFixed(1)),
         toValue: parseFloat(toNutrition.prot.toFixed(1)),
-        isSelected: fromFood.classif === 'P',
-        suffix: 'g'
+        isSelected: fromFood.classif === "P",
+        suffix: "g",
       },
       {
-        label: 'Carb',
+        label: "Carb",
         fromValue: parseFloat(fromNutrition.carb.toFixed(1)),
         toValue: parseFloat(toNutrition.carb.toFixed(1)),
-        isSelected: fromFood.classif === 'C',
-        suffix: 'g'
+        isSelected: fromFood.classif === "C",
+        suffix: "g",
       },
       {
-        label: 'Gord',
+        label: "Gord",
         fromValue: parseFloat(fromNutrition.gord.toFixed(1)),
         toValue: parseFloat(toNutrition.gord.toFixed(1)),
-        isSelected: fromFood.classif === 'L',
-        suffix: 'g'
-      }
+        isSelected: fromFood.classif === "L",
+        suffix: "g",
+      },
     ];
   }, [fromFood, toFood, fromQuantity, toQuantity]);
 
   const kcalIncreasePercent = useMemo(() => {
-    const kcalRow = comparisonRows.find((row) => row.label === 'Kcal');
-    if (!kcalRow || kcalRow.fromValue <= 0 || kcalRow.toValue <= kcalRow.fromValue) {
+    const kcalRow = comparisonRows.find((row) => row.label === "Kcal");
+    if (
+      !kcalRow ||
+      kcalRow.fromValue <= 0 ||
+      kcalRow.toValue <= kcalRow.fromValue
+    ) {
       return null;
     }
 
-    const increase = ((kcalRow.toValue - kcalRow.fromValue) / kcalRow.fromValue) * 100;
+    const increase =
+      ((kcalRow.toValue - kcalRow.fromValue) / kcalRow.fromValue) * 100;
     return Math.round(increase);
   }, [comparisonRows]);
 
   const kcalIncrease = useMemo(() => {
-    const kcalRow = comparisonRows.find((row) => row.label === 'Kcal');
+    const kcalRow = comparisonRows.find((row) => row.label === "Kcal");
     if (!kcalRow || kcalRow.toValue <= kcalRow.fromValue) {
       return null;
     }
@@ -177,7 +187,9 @@ export default function Home() {
       <header className="bg-white shadow-sm flex-shrink-0">
         <div className="max-w-2xl mx-auto px-4 py-4 flex justify-between items-center">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900"><Link href="/">Assim ou Assado</Link></h1>
+            <h1 className="text-2xl font-bold text-gray-900">
+              <Link href="/">Assim ou Assado</Link>
+            </h1>
             <p className="text-sm text-gray-600">por @experimentotech</p>
           </div>
           <button
@@ -267,7 +279,9 @@ export default function Home() {
               {kcalIncreasePercent !== null && (
                 <div className="mt-6 flex flex-col gap-3">
                   <p className="text-lg text-gray-700">
-                    Houve um aumento calorico de <strong>{kcalIncreasePercent}%</strong> Gostaria de compensar?
+                    Houve um aumento calorico de{" "}
+                    <strong>{kcalIncreasePercent}%</strong> Gostaria de
+                    compensar?
                   </p>
                   <button
                     type="button"
@@ -286,10 +300,16 @@ export default function Home() {
       <footer className="bg-white border-t mt-auto flex-shrink-0">
         <div className="max-w-2xl mx-auto px-4 py-8">
           <div className="flex flex-wrap gap-4 justify-center text-sm">
-            <a href="/assim-ou-assado/termos-de-uso" className="text-gray-600 hover:text-blue-600">
+            <a
+              href="/assim-ou-assado/termos-de-uso"
+              className="text-gray-600 hover:text-blue-600"
+            >
               Termos de Uso
             </a>
-            <a href="/assim-ou-assado/privacidade" className="text-gray-600 hover:text-blue-600">
+            <a
+              href="/assim-ou-assado/privacidade"
+              className="text-gray-600 hover:text-blue-600"
+            >
               Privacidade
             </a>
           </div>
@@ -298,11 +318,13 @@ export default function Home() {
 
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       <ConsentBanner />
-      {isCompensationOpen && <CompensationModal
-        onClose={handleCompensationClose}
-        foods={searchableAlimentos}
-        kcalIncrease={kcalIncrease}
-      />}
+      {isCompensationOpen && (
+        <CompensationModal
+          onClose={handleCompensationClose}
+          foods={searchableAlimentos}
+          kcalIncrease={kcalIncrease}
+        />
+      )}
     </div>
   );
-};
+}

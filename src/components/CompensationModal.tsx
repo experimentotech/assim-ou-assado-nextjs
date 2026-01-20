@@ -15,36 +15,38 @@ interface CompensationModalProps {
 export const CompensationModal = ({
   onClose,
   foods,
-  kcalIncrease
+  kcalIncrease,
 }: CompensationModalProps) => {
-  const [compensationFood, setCompensationFood] = useState<Alimento | null>(null);
-  const [compensationSearch, setCompensationSearch] = useState('');
+  const [compensationFood, setCompensationFood] = useState<Alimento | null>(
+    null,
+  );
+  const [compensationSearch, setCompensationSearch] = useState("");
 
   const compensationWeight = useMemo(() => {
     if (!compensationFood || !kcalIncrease || !compensationFood) {
       return null;
     }
     const nutrition = calculateNutrition(compensationFood, 100);
-    return Math.round(kcalIncrease * 100 / nutrition.kcal);
+    return Math.round((kcalIncrease * 100) / nutrition.kcal);
   }, [compensationFood, kcalIncrease]);
 
   const handleClose = useCallback(() => {
     setCompensationFood(null);
-    setCompensationSearch('');
+    setCompensationSearch("");
     onClose();
   }, [onClose]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
+      if (e.key === "Escape") {
         handleClose();
       }
     };
 
-    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, [handleClose]);
 
@@ -85,7 +87,8 @@ export const CompensationModal = ({
         />
         {compensationWeight !== null && (
           <p className="mt-4 text-lg text-gray-700">
-            Reduza <strong>{compensationWeight}g</strong> para compensar as calorias
+            Reduza <strong>{compensationWeight}g</strong> para compensar as
+            calorias
           </p>
         )}
       </div>
