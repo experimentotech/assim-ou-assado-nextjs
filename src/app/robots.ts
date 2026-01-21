@@ -9,8 +9,8 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: "*",
-      allow: "/",
-      disallow: "/private/",
+      allow: "/assim-ou-assado/",
+      disallow: "/assim-ou-assado/private/",
     },
     sitemap: `${siteUrl}/sitemap.xml`,
   };
