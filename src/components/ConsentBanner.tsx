@@ -3,23 +3,39 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+export interface Consent {
+  adConsentGranted?: boolean;
+  adUserDataConsentGranted?: boolean;
+  adPersonalizationConsentGranted?: boolean;
+  analyticsConsentGranted?: boolean;
+  functionalityConsentGranted?: boolean;
+  personalizationConsentGranted?: boolean;
+  securityConsentGranted?: boolean;
+}
+
+export type InitUserConsentCallback = (consent?: Consent) => void;
+
+declare global {
+  interface Window {
+    postUserConsent(consent: Consent): void;
+    addInitUserConsentListener(callback: InitUserConsentCallback): void;
+  }
+}
+
 export const ConsentBanner: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    new Promise<void>((resolve) => {
-      const consent = localStorage.getItem("cookie-consent");
-      if (!consent) {
+    window.addInitUserConsentListener((consent) => {
+      console.log("InitConsent", consent);
+      if (!consent?.analyticsConsentGranted) {
         setIsVisible(true);
       }
-      resolve();
     });
   }, []);
 
   const handleClose = () => {
-    const expiryDate = new Date();
-    expiryDate.setMonth(expiryDate.getMonth() + 1);
-    localStorage.setItem("cookie-consent", expiryDate.toISOString());
+    window.postUserConsent({ analyticsConsentGranted: true });
     setIsVisible(false);
   };
 
