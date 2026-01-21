@@ -40,6 +40,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const analyticsId = process.env.NEXT_PUBLIC_ANALYTICS_ID || "";
   return (
     <html lang="pt-BR">
       <head>
@@ -52,7 +53,7 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className}>{children}</body>
-      <GoogleTagManager gtmId="GTM-MDBDKG3T" />
+      <GoogleTagManager gtmId={analyticsId} />
     </html>
   );
 }
