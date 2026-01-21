@@ -81,7 +81,7 @@ export default function Home() {
 
     new Promise<void>((resolve) => {
       setToQuantity(toQuantity);
-      tracker.comparison({
+      tracker.compare({
         fromFood: fromFood.nome,
         fromQty: fromQuantity,
         fromClassif: fromFood.classif,
@@ -96,7 +96,7 @@ export default function Home() {
   const handleFromFoodSelect = (food: Alimento) => {
     setFromFood(food);
     setFromFoodSearch(food.nome);
-    tracker.initialFoodChanged(food.nome);
+    tracker.initialFoodSelect(food.nome, food.classif);
   };
 
   const handleFromQuantityChanged = (e: ChangeEvent<HTMLInputElement>) => {
@@ -108,7 +108,7 @@ export default function Home() {
   const handleToFoodSelect = (food: Alimento) => {
     setToFood(food);
     setToFoodSearch(food.nome);
-    tracker.destinationFoodChanged(food.nome);
+    tracker.destinationFoodSelect(food.nome, food.classif);
   };
 
   const handleFromFoodClear = () => {

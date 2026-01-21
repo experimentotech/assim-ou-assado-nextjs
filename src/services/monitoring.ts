@@ -24,28 +24,31 @@ export const tracker = {
     });
   },
 
-  initialFoodChanged(food: string) {
+  initialFoodSelect(food: string, classif: string) {
     sendEvent({
-      event: "initial_food_changed",
+      event: "initial_food_select",
       food: normalizeText(food),
+      classif: classif.toLowerCase(),
     });
   },
 
-  destinationFoodChanged(food: string) {
+  destinationFoodSelect(food: string, classif: string) {
     sendEvent({
-      event: "dest_food_changed",
+      event: "dest_food_select",
       food: normalizeText(food),
+      classif: classif.toLowerCase(),
     });
   },
 
-  compensationFoodChanged(food: string) {
+  compensationFoodSelect(food: string, classif: string) {
     sendEvent({
-      event: "compensation_food_changed",
+      event: "compensation_food_select",
       food: normalizeText(food),
+      classif: classif.toLowerCase(),
     });
   },
 
-  comparison(comparison: Comparison) {
+  compare(comparison: Comparison) {
     const compareType = `${comparison.fromClassif}${comparison.toClassif}`;
 
     sendEvent({

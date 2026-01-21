@@ -80,7 +80,7 @@ export const CompensationModal = ({
           onSelect={(food) => {
             setCompensationFood(food);
             setCompensationSearch(food.nome);
-            tracker.compensationFoodChanged(food.nome);
+            tracker.compensationFoodSelect(food.nome, food.classif);
           }}
           foods={foods}
           placeholder="Selecione um alimento"
