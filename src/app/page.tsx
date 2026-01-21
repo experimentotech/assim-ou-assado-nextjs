@@ -18,6 +18,31 @@ import { Menu } from "lucide-react";
 import Link from "next/link";
 import { ChangeEvent, useEffect, useMemo, useState } from "react";
 
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "";
+
+const jsonLd: Record<string, string | object> = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "Assim ou Assado - Calculadora de Macronutrientes",
+  url: baseUrl,
+  description:
+    "Encontre um substituto para o seu alimento com base nas " +
+    "proteínas, carboidratos e gorduras e não perca a sua dieta.",
+  applicationCategory: "HealthApplication",
+  operatingSystem: "All",
+  browserRequirements: "requires HTML5 and JavaScript support",
+  inLanguage: "pt-BR",
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "BRL",
+  },
+  author: {
+    "@type": "Organization",
+    name: "ExperimentoTech",
+  },
+};
+
 export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [searchableAlimentos, setSearchableAlimentos] = useState<
@@ -184,6 +209,10 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <header className="bg-white shadow-sm flex-shrink-0">
         <div className="max-w-2xl mx-auto px-4 py-4 flex justify-between items-center">
           <div>
