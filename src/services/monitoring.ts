@@ -49,7 +49,8 @@ export const tracker = {
     const compareType = `${comparison.fromClassif}${comparison.toClassif}`;
 
     sendEvent({
-      event: `compare_${compareType}`.toLowerCase(),
+      event: "compare",
+      comp_type: compareType.toLowerCase(),
       from_food: normalizeText(comparison.fromFood),
       from_qty: comparison.fromQty,
       to_food: normalizeText(comparison.toFood),
