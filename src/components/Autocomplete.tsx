@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { Search, ThumbsUp, X } from "lucide-react";
+import { Check, Search, X } from "lucide-react";
 import { Alimento, AlimentoSearchable } from "@/types";
 import { normalizeText, searchFoods } from "@/services/foodSearch";
 import { tracker } from "@/services/monitoring";
@@ -157,8 +157,8 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
                   </button>
                 )}
               {suggestionStatus === "sent" && (
-                <div className="ml-auto">
-                  <ThumbsUp className="h-4 w-4" />
+                <div className="ml-auto text-green-600">
+                  <Check className="h-4 w-4" />
                 </div>
               )}
             </div>
