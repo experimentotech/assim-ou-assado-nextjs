@@ -7,6 +7,8 @@ import { minify } from "@/utils/minifier";
 
 const inter = Inter({ subsets: ["latin"] });
 
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
+
 export const metadata: Metadata = {
   title: "Assim ou Assado - Conversor de Ingredientes | ExperimentoTech",
   description:
@@ -17,17 +19,27 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "pt_BR",
-    url: "https://www.experimentotech.com/assim-ou-assado/",
+    url: `${baseUrl}/`,
     title: "Assim ou Assado - Conversor de Ingredientes",
     description:
       "Encontre a medida certa para substituir ingredientes mantendo os mesmos nutrientes.",
     siteName: "Assim ou Assado",
+    images: {
+      url: `${baseUrl}/appsharemeta.jpeg`,
+      width: 1200,
+      height: 630,
+    },
   },
   twitter: {
     card: "summary_large_image",
     title: "Assim ou Assado - Conversor de Ingredientes",
     description:
       "Encontre a medida certa para substituir ingredientes mantendo os mesmos nutrientes.",
+    images: {
+      url: `${baseUrl}/appsharemeta.jpeg`,
+      width: 1200,
+      height: 630,
+    },
   },
   robots: {
     index: true,
