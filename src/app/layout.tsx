@@ -25,9 +25,7 @@ export const metadata: Metadata = {
       "Encontre a medida certa para substituir ingredientes mantendo os mesmos nutrientes.",
     siteName: "Assim ou Assado",
     images: {
-      url: `${baseUrl}/appsharemeta.jpeg`,
-      width: 1200,
-      height: 630,
+      url: `${baseUrl}/appsharemeta_v2.jpeg`,
     },
   },
   twitter: {
@@ -36,9 +34,7 @@ export const metadata: Metadata = {
     description:
       "Encontre a medida certa para substituir ingredientes mantendo os mesmos nutrientes.",
     images: {
-      url: `${baseUrl}/appsharemeta.jpeg`,
-      width: 1200,
-      height: 630,
+      url: `${baseUrl}/appsharemeta_v2.jpeg`,
     },
   },
   robots: {
