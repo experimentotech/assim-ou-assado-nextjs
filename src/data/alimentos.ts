@@ -639,7 +639,7 @@ export const alimentos: Alimento[] = [
   { id: 238, nome: "Mexerica", prot: 0.6, carb: 9.3, lip: 0.1, classif: "C" },
   { id: 239, nome: "Morango", prot: 0.8, carb: 6.8, lip: 0.3, classif: "C" },
   { id: 240, nome: "Nêspera", prot: 0.3, carb: 11.5, lip: 0.0, classif: "C" },
-  { id: 241, nome: "Pequi", prot: 2.3, carb: 12.9, lip: 17.9, classif: "L" },
+  { id: 241, nome: "Pequi", prot: 2.3, carb: 12.9, lip: 17.9, classif: "C" },
   { id: 242, nome: "Pera park", prot: 0.2, carb: 16.0, lip: 0.2, classif: "C" },
   {
     id: 243,
