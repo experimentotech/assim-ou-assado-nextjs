@@ -57,6 +57,8 @@ export default function Home() {
   const [toFoodSearch, setToFoodSearch] = useState("");
   const [toQuantity, setToQuantity] = useState("");
   const [isCompensationOpen, setIsCompensationOpen] = useState(false);
+  const fromUnit = fromFood?.medida_un != null ? "un" : "gr";
+  const toUnit = toFood?.medida_un != null ? "un" : "gr";
 
   // Mock data for demonstration
   useEffect(() => {
@@ -258,7 +260,7 @@ export default function Home() {
                 className="col-span-3 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100"
               />
               <div className="flex items-center justify-center border border-gray-300 rounded-lg text-gray-600">
-                gr
+                {fromUnit}
               </div>
             </div>
 
@@ -292,7 +294,7 @@ export default function Home() {
                 className="col-span-3 px-4 py-3 border border-gray-300 rounded-lg bg-gray-100"
               />
               <div className="flex items-center justify-center border border-gray-300 rounded-lg text-gray-600">
-                gr
+                {toUnit}
               </div>
             </div>
           </div>

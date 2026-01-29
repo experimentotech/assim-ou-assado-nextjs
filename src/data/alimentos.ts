@@ -1573,6 +1573,7 @@ export const alimentos: Alimento[] = [
     carb: 0.6,
     lip: 9.4,
     classif: "P",
+    medida_un: 46,
   },
   {
     id: 490,
@@ -1581,6 +1582,7 @@ export const alimentos: Alimento[] = [
     carb: 1.1,
     lip: 18.5,
     classif: "P",
+    medida_un: 46,
   },
   {
     id: 492,

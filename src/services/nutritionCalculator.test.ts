@@ -88,6 +88,50 @@ describe("calculateDestinationQuantity", () => {
     };
     expect(calculateDestinationQuantity(fromFood, toFood, 150)).toBe(0);
   });
+
+  it("converts from units to grams when origem has medida_un", () => {
+    const fromFood: Alimento = {
+      id: 7,
+      nome: "Ovo cozido",
+      prot: 13,
+      carb: 1,
+      lip: 11,
+      classif: "P",
+      medida_un: 46,
+    };
+    const toFood: Alimento = {
+      id: 8,
+      nome: "Frango grelhado",
+      prot: 32,
+      carb: 0,
+      lip: 2,
+      classif: "P",
+    };
+
+    expect(calculateDestinationQuantity(fromFood, toFood, 2)).toBe(37);
+  });
+
+  it("returns units when destino has medida_un", () => {
+    const fromFood: Alimento = {
+      id: 9,
+      nome: "Frango grelhado",
+      prot: 32,
+      carb: 0,
+      lip: 2,
+      classif: "P",
+    };
+    const toFood: Alimento = {
+      id: 10,
+      nome: "Ovo cozido",
+      prot: 13,
+      carb: 1,
+      lip: 11,
+      classif: "P",
+      medida_un: 46,
+    };
+
+    expect(calculateDestinationQuantity(fromFood, toFood, 100)).toBe(5);
+  });
 });
 
 describe("calculateNutrition", () => {
@@ -128,6 +172,28 @@ describe("calculateNutrition", () => {
       prot: 0,
       carb: 0,
       gord: 0,
+    });
+  });
+
+  it("interprets quantity as units when medida_un is present", () => {
+    const food: Alimento = {
+      id: 11,
+      nome: "Ovo cozido",
+      prot: 13,
+      carb: 1,
+      lip: 11,
+      classif: "P",
+      medida_un: 46,
+    };
+
+    const result = calculateNutrition(food, 2);
+
+    expect(result).toEqual({
+      weight: 92,
+      kcal: (13 * 4 + 1 * 4 + 11 * 9) * 0.92,
+      prot: 13 * 0.92,
+      carb: 1 * 0.92,
+      gord: 11 * 0.92,
     });
   });
 });

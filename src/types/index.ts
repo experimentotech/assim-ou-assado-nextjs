@@ -11,6 +11,7 @@ export interface Alimento {
   carb: number;
   lip: number;
   classif: AlimentoClassif;
+  medida_un?: number;
 }
 
 export interface AlimentoSearchable extends Alimento {

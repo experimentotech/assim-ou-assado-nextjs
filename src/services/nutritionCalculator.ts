@@ -21,18 +21,28 @@ export const calculateDestinationQuantity = (
     return 0;
   }
 
-  const fromTotal = (fromPer100g * fromQuantity) / 100;
-  return Math.round((100 * fromTotal) / toPer100g);
+  const fromWeight =
+    fromFood.medida_un != null ? fromFood.medida_un * fromQuantity : fromQuantity;
+  const fromTotal = (fromPer100g * fromWeight) / 100;
+  const gramsNeeded = (100 * fromTotal) / toPer100g;
+
+  if (toFood.medida_un != null && toFood.medida_un > 0) {
+    return Math.round(gramsNeeded / toFood.medida_un);
+  }
+
+  return Math.round(gramsNeeded);
 };
 
 /**
  * Calculates nutritional values for a given quantity
  */
 export const calculateNutrition = (food: Alimento, quantity: number) => {
-  const multiplier = quantity / 100;
+  const weight =
+    food.medida_un != null ? food.medida_un * quantity : quantity;
+  const multiplier = weight / 100;
   const kcal = food.prot * 4 + food.carb * 4 + food.lip * 9;
   return {
-    weight: quantity,
+    weight,
     kcal: kcal * multiplier,
     prot: food.prot * multiplier,
     carb: food.carb * multiplier,
