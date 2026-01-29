@@ -14,6 +14,7 @@
 - `npm run build`: build the Next.js app for production.
 - `npm run start`: run the production server from the build output.
 - `npm run lint`: run ESLint with Next.js core-web-vitals and TypeScript rules.
+- `npm run test`: run unit tests with Vitest.
 - `npm run postbuild`: moves the exported build output into `dist/assim-ou-assado`.
 
 ## Coding Style & Naming Conventions
@@ -23,7 +24,7 @@
 - File/folder names use `kebab-case` for routes and `PascalCase` for React components.
 
 ## Testing Guidelines
-- No test framework is configured yet; add tests alongside features when introduced.
+- Vitest is the unit test framework for this repo.
 - If adding tests, prefer colocating under `src/` with `*.test.ts(x)` naming.
 - Document any new test commands in `package.json` and update this file.
 
