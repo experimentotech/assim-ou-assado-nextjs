@@ -17,6 +17,10 @@ export const calculateDestinationQuantity = (
   const fromPer100g = fromFood[attr];
   const toPer100g = toFood[attr];
 
+  if (toPer100g === 0) {
+    return 0;
+  }
+
   const fromTotal = (fromPer100g * fromQuantity) / 100;
   return Math.round((100 * fromTotal) / toPer100g);
 };

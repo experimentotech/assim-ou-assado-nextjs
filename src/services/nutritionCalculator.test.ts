@@ -68,6 +68,26 @@ describe("calculateDestinationQuantity", () => {
 
     expect(calculateDestinationQuantity(fromFood, toFood, 10)).toBe(67);
   });
+
+  it("compares a carb with a no carb food", () => {
+    const fromFood: Alimento = {
+      id: 236,
+      nome: "Melão",
+      prot: 0.6,
+      carb: 7.5,
+      lip: 0.0,
+      classif: "C",
+    };
+    const toFood: Alimento = {
+      id: 410,
+      nome: "Filé de frango grelhado",
+      prot: 32.0,
+      carb: 0.0,
+      lip: 2.4,
+      classif: "P",
+    };
+    expect(calculateDestinationQuantity(fromFood, toFood, 150)).toBe(0);
+  });
 });
 
 describe("calculateNutrition", () => {
@@ -89,6 +109,25 @@ describe("calculateNutrition", () => {
       prot: 2.5,
       carb: 5,
       gord: 1,
+    });
+  });
+
+  it("calculates when quantity is 0", () => {
+    const food: Alimento = {
+      id: 7,
+      nome: "Iogurte",
+      prot: 5,
+      carb: 10,
+      lip: 2,
+      classif: "P",
+    };
+
+    expect(calculateNutrition(food, 0)).toEqual({
+      weight: 0,
+      kcal: 0,
+      prot: 0,
+      carb: 0,
+      gord: 0,
     });
   });
 });
