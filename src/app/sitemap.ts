@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import fs from "node:fs";
 import path from "node:path";
+import { substitutionPageUrls } from "@/data/substitutionPageUrls";
 
 export const dynamic = "force-static";
 
@@ -12,6 +13,14 @@ function getLastModified(filePath: string): Date {
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "";
+  const normalizedBaseUrl = baseUrl.replace(/\/$/, "");
+
+  const substitutionPages = substitutionPageUrls.map((slug) => ({
+    url: `${normalizedBaseUrl}/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: 0.6,
+  }));
 
   return [
     {
@@ -32,5 +41,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    ...substitutionPages,
   ];
 }
