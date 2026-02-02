@@ -1,9 +1,7 @@
 import { HomePage } from "@/components/HomePage";
-import { alimentosSlugList, alimentosSlugMap } from "@/data/foodSlugMap";
-import {
-  buildSubstitutionSlug,
-  parseSubstitutionSlug,
-} from "@/services/foodSlug";
+import { alimentosSlugMap } from "@/data/foodSlugMap";
+import { substitutionPageUrls } from "@/data/substitutionPageUrls";
+import { parseSubstitutionSlug } from "@/services/foodSlug";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -14,15 +12,9 @@ const normalizeBaseUrl = (url: string) => url.replace(/\/$/, "");
 export const dynamicParams = false;
 
 export const generateStaticParams = async () => {
-  const params: { slug: string }[] = [];
-  for (const destinationSlug of alimentosSlugList) {
-    for (const initialSlug of alimentosSlugList) {
-      params.push({
-        slug: buildSubstitutionSlug(destinationSlug, initialSlug),
-      });
-    }
-  }
-  return params;
+  return substitutionPageUrls.map((slug) => ({
+    slug,
+  }));
 };
 
 export const generateMetadata = async ({
