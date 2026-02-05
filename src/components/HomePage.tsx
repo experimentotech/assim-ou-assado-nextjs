@@ -6,14 +6,13 @@ import { CompensationModal } from "@/components/CompensationModal";
 import { ConsentBanner } from "@/components/ConsentBanner";
 import { Logo } from "@/components/Logo";
 import { Sidebar } from "@/components/Sidebar";
-import { foods } from "@/data/foods";
-import { prepareSearchableList } from "@/services/foodSearch";
+import { searchableFoods } from "@/data/searchableFoods";
 import { tracker } from "@/services/monitoring";
 import {
   calculateDestinationQuantity,
   calculateNutrition,
 } from "@/services/nutritionCalculator";
-import { Food, FoodSearchable, ComparisonRow } from "@/types";
+import { Food, ComparisonRow } from "@/types";
 import { Menu } from "lucide-react";
 import Link from "next/link";
 import { ChangeEvent, useEffect, useMemo, useState } from "react";
@@ -58,7 +57,6 @@ export function HomePage({
   initialToFood = null,
 }: HomePageProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [searchableFoods, setSearchableFoods] = useState<FoodSearchable[]>([]);
 
   const [fromFood, setFromFood] = useState<Food | null>(initialFromFood);
   const [fromFoodSearch, setFromFoodSearch] = useState(
@@ -74,13 +72,6 @@ export function HomePage({
   const [isCompensationOpen, setIsCompensationOpen] = useState(false);
   const fromUnit = fromFood?.medida_un != null ? "un" : "gr";
   const toUnit = toFood?.medida_un != null ? "un" : "gr";
-
-  useEffect(() => {
-    new Promise<void>((resolve) => {
-      setSearchableFoods(prepareSearchableList(foods));
-      resolve();
-    });
-  }, []);
 
   useEffect(() => {
     if (!fromFood || !toFood || !fromQuantity) {
