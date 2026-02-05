@@ -337,13 +337,13 @@ export function HomePage({
         <div className="max-w-2xl mx-auto px-4 py-8">
           <div className="flex flex-wrap gap-4 justify-center text-sm">
             <Link
-              href="/assim-ou-assado/termos-de-uso"
+              href="/termos-de-uso"
               className="text-gray-600 hover:text-blue-600"
             >
               Termos de Uso
             </Link>
             <Link
-              href="/assim-ou-assado/privacidade"
+              href="/privacidade"
               className="text-gray-600 hover:text-blue-600"
             >
               Privacidade
