@@ -1,13 +1,11 @@
-import { alimentos } from "@/data/alimentos";
+import { foods } from "@/data/foods";
 import { prepareSearchableList } from "@/services/foodSearch";
-import { Alimento } from "@/types";
+import { Food } from "@/types";
 
-export const alimentosSlugMap: Record<string, Alimento> = prepareSearchableList(
-  alimentos,
-).reduce((acc: Record<string, Alimento>, cur) => {
+export const foodsSlugMap: Record<string, Food> = prepareSearchableList(
+  foods,
+).reduce((acc: Record<string, Food>, cur) => {
   const slug = cur.searchTerms.replace(/\s+/g, "-");
   acc[slug] = cur;
   return acc;
 }, {});
-
-export const alimentosSlugList = Object.keys(alimentosSlugMap);

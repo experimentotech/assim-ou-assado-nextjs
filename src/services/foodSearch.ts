@@ -1,4 +1,4 @@
-import { Alimento, AlimentoSearchable } from "@/types";
+import { Food, FoodSearchable } from "@/types";
 
 /**
  * Normalizes text by removing accents and converting to lowercase
@@ -13,12 +13,10 @@ export const normalizeText = (text: string): string => {
 /**
  * Prepares food list for searching by pre-computing normalized search terms
  */
-export const prepareSearchableList = (
-  alimentos: Alimento[],
-): AlimentoSearchable[] => {
-  return alimentos.map((alimento) => ({
-    ...alimento,
-    searchTerms: normalizeText(alimento.nome),
+export const prepareSearchableList = (foods: Food[]): FoodSearchable[] => {
+  return foods.map((food) => ({
+    ...food,
+    searchTerms: normalizeText(food.nome),
   }));
 };
 
@@ -28,9 +26,9 @@ export const prepareSearchableList = (
  */
 export const searchFoods = (
   query: string,
-  foods: AlimentoSearchable[],
+  foods: FoodSearchable[],
   excludeId?: number,
-): AlimentoSearchable[] => {
+): FoodSearchable[] => {
   if (!query.trim()) return [];
 
   const normalizedQuery = normalizeText(query);

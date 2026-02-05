@@ -1,6 +1,6 @@
-import { Alimento } from "@/types";
+import { Food } from "@/types";
 
-export const alimentos: Alimento[] = [
+export const foods: Food[] = [
   {
     id: 1,
     nome: "Arroz integral",

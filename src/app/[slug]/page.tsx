@@ -1,5 +1,5 @@
 import { HomePage } from "@/components/HomePage";
-import { alimentosSlugMap } from "@/data/foodSlugMap";
+import { foodsSlugMap } from "@/data/foodSlugMap";
 import { substitutionPageUrls } from "@/data/substitutionPageUrls";
 import { parseSubstitutionSlug } from "@/services/foodSlug";
 import type { Metadata } from "next";
@@ -26,8 +26,8 @@ export const generateMetadata = async ({
   const parsed = parseSubstitutionSlug(resolvedParams.slug);
   if (!parsed) return {};
 
-  const toFood = alimentosSlugMap[parsed.destinationSlug];
-  const fromFood = alimentosSlugMap[parsed.initialSlug];
+  const toFood = foodsSlugMap[parsed.destinationSlug];
+  const fromFood = foodsSlugMap[parsed.initialSlug];
   if (!toFood || !fromFood) return {};
 
   const toTitle = toFood.nome;
@@ -73,8 +73,8 @@ export default async function FoodSubstitutionPage({
     notFound();
   }
 
-  const toFood = alimentosSlugMap[parsed.destinationSlug];
-  const fromFood = alimentosSlugMap[parsed.initialSlug];
+  const toFood = foodsSlugMap[parsed.destinationSlug];
+  const fromFood = foodsSlugMap[parsed.initialSlug];
 
   if (!toFood || !fromFood) {
     notFound();

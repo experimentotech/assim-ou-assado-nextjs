@@ -6,14 +6,14 @@ import { CompensationModal } from "@/components/CompensationModal";
 import { ConsentBanner } from "@/components/ConsentBanner";
 import { Logo } from "@/components/Logo";
 import { Sidebar } from "@/components/Sidebar";
-import { alimentos } from "@/data/alimentos";
+import { foods } from "@/data/foods";
 import { prepareSearchableList } from "@/services/foodSearch";
 import { tracker } from "@/services/monitoring";
 import {
   calculateDestinationQuantity,
   calculateNutrition,
 } from "@/services/nutritionCalculator";
-import { Alimento, AlimentoSearchable, ComparisonRow } from "@/types";
+import { Food, FoodSearchable, ComparisonRow } from "@/types";
 import { Menu } from "lucide-react";
 import Link from "next/link";
 import { ChangeEvent, useEffect, useMemo, useState } from "react";
@@ -43,14 +43,14 @@ const jsonLd: Record<string, string | object> = {
   },
 };
 
-const defaultQuantityForFood = (food: Alimento | null): string => {
+const defaultQuantityForFood = (food: Food | null): string => {
   if (!food) return "";
   return food.medida_un != null ? "1" : "100";
 };
 
 type HomePageProps = {
-  initialFromFood?: Alimento | null;
-  initialToFood?: Alimento | null;
+  initialFromFood?: Food | null;
+  initialToFood?: Food | null;
 };
 
 export function HomePage({
@@ -58,11 +58,9 @@ export function HomePage({
   initialToFood = null,
 }: HomePageProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [searchableAlimentos, setSearchableAlimentos] = useState<
-    AlimentoSearchable[]
-  >([]);
+  const [searchableFoods, setSearchableFoods] = useState<FoodSearchable[]>([]);
 
-  const [fromFood, setFromFood] = useState<Alimento | null>(initialFromFood);
+  const [fromFood, setFromFood] = useState<Food | null>(initialFromFood);
   const [fromFoodSearch, setFromFoodSearch] = useState(
     initialFromFood?.nome ?? "",
   );
@@ -70,7 +68,7 @@ export function HomePage({
     defaultQuantityForFood(initialFromFood),
   );
 
-  const [toFood, setToFood] = useState<Alimento | null>(initialToFood);
+  const [toFood, setToFood] = useState<Food | null>(initialToFood);
   const [toFoodSearch, setToFoodSearch] = useState(initialToFood?.nome ?? "");
   const [toQuantity, setToQuantity] = useState("");
   const [isCompensationOpen, setIsCompensationOpen] = useState(false);
@@ -79,7 +77,7 @@ export function HomePage({
 
   useEffect(() => {
     new Promise<void>((resolve) => {
-      setSearchableAlimentos(prepareSearchableList(alimentos));
+      setSearchableFoods(prepareSearchableList(foods));
       resolve();
     });
   }, []);
@@ -111,7 +109,7 @@ export function HomePage({
     });
   }, [fromFood, toFood, fromQuantity]);
 
-  const handleFromFoodSelect = (food: Alimento) => {
+  const handleFromFoodSelect = (food: Food) => {
     setFromFood(food);
     setFromFoodSearch(food.nome);
     tracker.initialFoodSelect(food.nome, food.classif);
@@ -123,7 +121,7 @@ export function HomePage({
     if (!val) setToQuantity("");
   };
 
-  const handleToFoodSelect = (food: Alimento) => {
+  const handleToFoodSelect = (food: Food) => {
     setToFood(food);
     setToFoodSearch(food.nome);
     tracker.destinationFoodSelect(food.nome, food.classif);
@@ -262,7 +260,7 @@ export function HomePage({
                 if (!value) handleFromFoodClear();
               }}
               onSelect={handleFromFoodSelect}
-              foods={searchableAlimentos}
+              foods={searchableFoods}
               placeholder="Ingrediente inicial"
             />
 
@@ -295,7 +293,7 @@ export function HomePage({
                 if (!value) handleToFoodClear();
               }}
               onSelect={handleToFoodSelect}
-              foods={searchableAlimentos}
+              foods={searchableFoods}
               placeholder="Ingrediente final"
               disabled={!fromFood}
               excludeId={fromFood?.id}
@@ -368,7 +366,7 @@ export function HomePage({
       {isCompensationOpen && (
         <CompensationModal
           onClose={handleCompensationClose}
-          foods={searchableAlimentos}
+          foods={searchableFoods}
           kcalIncrease={kcalIncrease}
         />
       )}

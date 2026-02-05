@@ -2,15 +2,15 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { Check, Search, X } from "lucide-react";
-import { Alimento, AlimentoSearchable } from "@/types";
+import { Food, FoodSearchable } from "@/types";
 import { normalizeText, searchFoods } from "@/services/foodSearch";
 import { tracker } from "@/services/monitoring";
 
 interface AutocompleteProps {
   value: string;
   onChange: (value: string) => void;
-  onSelect: (food: Alimento) => void;
-  foods: AlimentoSearchable[];
+  onSelect: (food: Food) => void;
+  foods: FoodSearchable[];
   placeholder: string;
   disabled?: boolean;
   excludeId?: number;

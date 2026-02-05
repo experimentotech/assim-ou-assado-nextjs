@@ -3,11 +3,11 @@ import {
   calculateDestinationQuantity,
   calculateNutrition,
 } from "./nutritionCalculator";
-import type { Alimento } from "@/types";
+import type { Food } from "@/types";
 
 describe("calculateDestinationQuantity", () => {
   it("uses protein for P classification", () => {
-    const fromFood: Alimento = {
+    const fromFood: Food = {
       id: 1,
       nome: "Frango",
       prot: 20,
@@ -15,7 +15,7 @@ describe("calculateDestinationQuantity", () => {
       lip: 5,
       classif: "P",
     };
-    const toFood: Alimento = {
+    const toFood: Food = {
       id: 2,
       nome: "Tofu",
       prot: 10,
@@ -28,7 +28,7 @@ describe("calculateDestinationQuantity", () => {
   });
 
   it("uses carbs for C classification", () => {
-    const fromFood: Alimento = {
+    const fromFood: Food = {
       id: 3,
       nome: "Arroz",
       prot: 2,
@@ -36,7 +36,7 @@ describe("calculateDestinationQuantity", () => {
       lip: 1,
       classif: "C",
     };
-    const toFood: Alimento = {
+    const toFood: Food = {
       id: 4,
       nome: "Macarrao",
       prot: 5,
@@ -49,7 +49,7 @@ describe("calculateDestinationQuantity", () => {
   });
 
   it("uses lipids for L classification", () => {
-    const fromFood: Alimento = {
+    const fromFood: Food = {
       id: 5,
       nome: "Azeite",
       prot: 0,
@@ -57,7 +57,7 @@ describe("calculateDestinationQuantity", () => {
       lip: 100,
       classif: "L",
     };
-    const toFood: Alimento = {
+    const toFood: Food = {
       id: 6,
       nome: "Abacate",
       prot: 2,
@@ -70,7 +70,7 @@ describe("calculateDestinationQuantity", () => {
   });
 
   it("compares a carb with a no carb food", () => {
-    const fromFood: Alimento = {
+    const fromFood: Food = {
       id: 236,
       nome: "Melão",
       prot: 0.6,
@@ -78,7 +78,7 @@ describe("calculateDestinationQuantity", () => {
       lip: 0.0,
       classif: "C",
     };
-    const toFood: Alimento = {
+    const toFood: Food = {
       id: 410,
       nome: "Filé de frango grelhado",
       prot: 32.0,
@@ -90,7 +90,7 @@ describe("calculateDestinationQuantity", () => {
   });
 
   it("converts from units to grams when origem has medida_un", () => {
-    const fromFood: Alimento = {
+    const fromFood: Food = {
       id: 7,
       nome: "Ovo cozido",
       prot: 13,
@@ -99,7 +99,7 @@ describe("calculateDestinationQuantity", () => {
       classif: "P",
       medida_un: 46,
     };
-    const toFood: Alimento = {
+    const toFood: Food = {
       id: 8,
       nome: "Frango grelhado",
       prot: 32,
@@ -112,7 +112,7 @@ describe("calculateDestinationQuantity", () => {
   });
 
   it("returns units when destino has medida_un", () => {
-    const fromFood: Alimento = {
+    const fromFood: Food = {
       id: 9,
       nome: "Frango grelhado",
       prot: 32,
@@ -120,7 +120,7 @@ describe("calculateDestinationQuantity", () => {
       lip: 2,
       classif: "P",
     };
-    const toFood: Alimento = {
+    const toFood: Food = {
       id: 10,
       nome: "Ovo cozido",
       prot: 13,
@@ -136,7 +136,7 @@ describe("calculateDestinationQuantity", () => {
 
 describe("calculateNutrition", () => {
   it("calculates macro totals for given quantity", () => {
-    const food: Alimento = {
+    const food: Food = {
       id: 7,
       nome: "Iogurte",
       prot: 5,
@@ -157,7 +157,7 @@ describe("calculateNutrition", () => {
   });
 
   it("calculates when quantity is 0", () => {
-    const food: Alimento = {
+    const food: Food = {
       id: 7,
       nome: "Iogurte",
       prot: 5,
@@ -176,7 +176,7 @@ describe("calculateNutrition", () => {
   });
 
   it("interprets quantity as units when medida_un is present", () => {
-    const food: Alimento = {
+    const food: Food = {
       id: 11,
       nome: "Ovo cozido",
       prot: 13,

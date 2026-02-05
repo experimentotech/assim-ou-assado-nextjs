@@ -2,19 +2,19 @@
 // TYPES
 // ============================================================================
 
-export type AlimentoClassif = "P" | "C" | "L";
+export type FoodClassif = "P" | "C" | "L";
 
-export interface Alimento {
+export interface Food {
   id: number;
   nome: string;
   prot: number;
   carb: number;
   lip: number;
-  classif: AlimentoClassif;
+  classif: FoodClassif;
   medida_un?: number;
 }
 
-export interface AlimentoSearchable extends Alimento {
+export interface FoodSearchable extends Food {
   searchTerms: string;
 }
 

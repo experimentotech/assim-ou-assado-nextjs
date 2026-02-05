@@ -2,13 +2,13 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Autocomplete } from "@/components/Autocomplete";
-import { Alimento, AlimentoSearchable } from "@/types";
+import { Food, FoodSearchable } from "@/types";
 import { calculateNutrition } from "@/services/nutritionCalculator";
 import { tracker } from "@/services/monitoring";
 
 interface CompensationModalProps {
   onClose: () => void;
-  foods: AlimentoSearchable[];
+  foods: FoodSearchable[];
   kcalIncrease: number | null;
 }
 
@@ -17,9 +17,7 @@ export const CompensationModal = ({
   foods,
   kcalIncrease,
 }: CompensationModalProps) => {
-  const [compensationFood, setCompensationFood] = useState<Alimento | null>(
-    null,
-  );
+  const [compensationFood, setCompensationFood] = useState<Food | null>(null);
   const [compensationSearch, setCompensationSearch] = useState("");
 
   const compensationWeight = useMemo(() => {

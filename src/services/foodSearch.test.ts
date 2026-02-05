@@ -4,9 +4,9 @@ import {
   prepareSearchableList,
   searchFoods,
 } from "./foodSearch";
-import type { Alimento } from "@/types";
+import type { Food } from "@/types";
 
-const baseFoods: Alimento[] = [
+const baseFoods: Food[] = [
   { id: 1, nome: "Arroz Integral", prot: 2, carb: 23, lip: 1, classif: "C" },
   { id: 2, nome: "Feijao Preto", prot: 9, carb: 14, lip: 1, classif: "P" },
   { id: 3, nome: "Ovo Cozido", prot: 13, carb: 1, lip: 11, classif: "P" },

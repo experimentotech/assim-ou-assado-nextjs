@@ -1,14 +1,14 @@
-import { AlimentoClassif } from "@/types";
+import { FoodClassif } from "@/types";
 import { sendGTMEvent } from "@next/third-parties/google";
 import { normalizeText } from "./foodSearch";
 
 interface Comparison {
   fromFood: string;
   fromQty: string;
-  fromClassif: AlimentoClassif;
+  fromClassif: FoodClassif;
   toFood: string;
   toQty: string;
-  toClassif: AlimentoClassif;
+  toClassif: FoodClassif;
 }
 
 function sendEvent(event: object) {
