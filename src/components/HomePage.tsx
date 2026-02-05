@@ -336,18 +336,18 @@ export function HomePage({
       <footer className="bg-white border-t mt-auto flex-shrink-0">
         <div className="max-w-2xl mx-auto px-4 py-8">
           <div className="flex flex-wrap gap-4 justify-center text-sm">
-            <a
+            <Link
               href="/assim-ou-assado/termos-de-uso"
               className="text-gray-600 hover:text-blue-600"
             >
               Termos de Uso
-            </a>
-            <a
+            </Link>
+            <Link
               href="/assim-ou-assado/privacidade"
               className="text-gray-600 hover:text-blue-600"
             >
               Privacidade
-            </a>
+            </Link>
           </div>
         </div>
       </footer>
