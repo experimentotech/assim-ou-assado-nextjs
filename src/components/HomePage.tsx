@@ -220,7 +220,7 @@ export function HomePage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <header className="bg-white shadow-sm flex-shrink-0">
+      <header className="bg-white shadow-sm shrink-0">
         <div className="max-w-2xl mx-auto px-4 py-4 flex justify-between items-center">
           <div>
             <h1 className="text-2xl font-bold text-gray-900">
@@ -333,7 +333,7 @@ export function HomePage({
         )}
       </main>
 
-      <footer className="bg-white border-t mt-auto flex-shrink-0">
+      <footer className="bg-white border-t mt-auto shrink-0">
         <div className="max-w-2xl mx-auto px-4 py-8">
           <div className="flex flex-wrap gap-4 justify-center text-sm">
             <Link
