@@ -70,6 +70,7 @@ export const CompensationModal = ({
           </button>
         </div>
         <Autocomplete
+          name="compensationFood"
           value={compensationSearch}
           onChange={(value) => {
             setCompensationSearch(value);

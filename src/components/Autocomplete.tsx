@@ -15,6 +15,7 @@ interface AutocompleteProps {
   disabled?: boolean;
   excludeId?: number;
   maxResults?: number;
+  name: string;
 }
 
 const suggestionsSet = new Set();
@@ -28,6 +29,7 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
   disabled = false,
   excludeId,
   maxResults = 6,
+  name,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -96,6 +98,7 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
         <Search className="absolute left-3 w-5 h-5 text-gray-400" />
         <input
           type="text"
+          name={name}
           value={value}
           onChange={(e) => {
             onChange(e.target.value);

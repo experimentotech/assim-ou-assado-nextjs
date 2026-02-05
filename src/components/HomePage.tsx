@@ -245,6 +245,7 @@ export function HomePage({
         <div className="bg-white rounded-lg p-6 shadow-sm mb-8">
           <div className="space-y-4">
             <Autocomplete
+              name="fromFood"
               value={fromFoodSearch}
               onChange={(value) => {
                 setFromFoodSearch(value);
@@ -258,6 +259,7 @@ export function HomePage({
             <div className="grid grid-cols-4 gap-2">
               <input
                 type="number"
+                name="fromQty"
                 value={fromQuantity}
                 onChange={handleFromQuantityChanged}
                 placeholder="Quantidade"
@@ -278,6 +280,7 @@ export function HomePage({
             </div>
 
             <Autocomplete
+              name="toFood"
               value={toFoodSearch}
               onChange={(value) => {
                 setToFoodSearch(value);
@@ -293,6 +296,7 @@ export function HomePage({
             <div className="grid grid-cols-4 gap-2">
               <input
                 type="number"
+                name="toQty"
                 value={toQuantity}
                 readOnly
                 placeholder="Quantidade"
